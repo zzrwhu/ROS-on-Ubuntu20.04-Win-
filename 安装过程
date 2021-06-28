@@ -1,0 +1,31 @@
+Reference :
+https://blog.csdn.net/mid_Faker/article/details/109003882
+http://wiki.ros.org/noetic/Installation/Ubuntu#Installation.2FUbuntu.2FSources.Set_up_your_keys
+
+系统要求：Ubuntu20.04
+
+ROS安装版本: Noetic
+
+1、添加 sources.list（设置你的电脑可以从 packages.ros.org 接收软件.）
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+2、添加 keys
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+3、安装
+sudo apt update
+安装桌面完整版 : 包含ROS、rqt、rviz、机器人通用库、2D/3D 模拟器、导航以及2D/3D感知
+sudo apt install ros-noetic-desktop-full
+
+Desktop Install: Everything in ROS-Base plus tools like rqt and rviz
+sudo apt install ros-noetic-desktop
+
+ROS-Base: (Bare Bones) ROS packaging, build, and communication libraries. No GUI tools.
+sudo apt install ros-noetic-ros-base
+
+There are even more packages available in ROS. You can always install a specific package directly.
+
+sudo apt install ros-noetic-PACKAGE
+e.g.
+sudo apt install ros-noetic-slam-gmapping
+
+To find available packages, see ROS Index or use:
+apt search ros-noetic
