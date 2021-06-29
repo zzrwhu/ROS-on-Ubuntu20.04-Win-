@@ -2,7 +2,7 @@ Reference :
 https://blog.csdn.net/mid_Faker/article/details/109003882
 http://wiki.ros.org/noetic/Installation/Ubuntu#Installation.2FUbuntu.2FSources.Set_up_your_keys
 
-系统要求：Ubuntu20.04
+系统要求：Ubuntu20.04 WSL version 1
 
 ROS安装版本: Noetic
 
@@ -74,10 +74,22 @@ After installing, you can initialize rosdep with the following.
   运行一个结点，此时若没有安装图形化界面将会出现error: libQt5Core.so.5
   rosrun turtlesim turtle_teleop_key
   
-  对于error: libQt5Core.so.5输入了
-  sudo strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+  （1）对于error: libQt5Core.so.5输入了
+      sudo strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
   
-  再次运行后出现如下error
-  qt.qpa.xcb: could not connect to display
-  qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
-  This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+      再次运行后出现如下error
+      qt.qpa.xcb: could not connect to display
+      qt.qpa.plugin: Could not load the Qt platform plugin "xcb" in "" even though it was found.
+      This application failed to start because no Qt platform plugin could be initialized. Reinstalling the application may fix this problem.
+      仍然是无GUI界面无法显示，安装Xming软件，将Windows和Linux进行远程链接
+  （2）根据博客https://blog.csdn.net/chch2010523/article/details/116532678  配置Xming
+      首先在Windows命令提示符中输入wsl -l -v 查看自己的wsl是1还是2
+      在zshrc或bashrc中添加如下代码
+      export DISPLAY=:0 # in WSL 1
+      # export DISPLAY=$(awk '/nameserver / {print $2; exit}' /etc/resolv.conf 2>/dev/null):0 # in WSL 2
+      export LIBGL_ALWAYS_INDIRECT= 
+      export LIBGL_ALWAYS_SOFTWARE=1
+      然后source ~/.bashrc
+   (3)启动Xming并运行三个ros语句
+      输入key部分后小乌龟不移动的原因：运行第三个语句后鼠标点击了其他窗口，导致键盘操作在其他窗口上，不要用鼠标做多余点击即可。
+至此，ROS在WSL上的配置即测试全部完成。
