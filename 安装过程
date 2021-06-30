@@ -93,3 +93,21 @@ After installing, you can initialize rosdep with the following.
    (3)启动Xming并运行三个ros语句
       输入key部分后小乌龟不移动的原因：运行第三个语句后鼠标点击了其他窗口，导致键盘操作在其他窗口上，不要用鼠标做多余点击即可。
 至此，ROS在WSL上的配置即测试全部完成。
+8. 安装Eclipse
+Download Eclipse with ROS Get JDK
+  $ sudo apt install openjdk-8-jdk
+Download the Linux x86_64 version of Eclipse from the website www.eclipse.org/downloads/packages/ Download from Windows Enter the Windows E: files with
+  $ cd /mnt/e
+Then unzip eclipse-cpp-2021-06-R-linux-gtk-x86_64.tar.gz Under /usr/share/applications make an entry
+  $sudo vim eclipse.desktop
+   [Desktop Entry]
+   Name=Eclipse 
+   Type=Application
+   Exec=bash -i -c "/opt/eclipse/eclipse"
+   Terminal=false
+   Icon=/opt/eclipse/icon.xpm
+   Comment=Integrated Development Environment
+   NoDisplay=false
+   Categories=Development;IDE
+   Name[en]=eclipse.desktop
+The bash –i - c command will cause your IDE's launcher icon to load your ROS-sourced shell environment before launching eclipse
